@@ -43,3 +43,15 @@ class HandTracker(ComputerVisionApp):  # INHERITANCE: Mana ang cam setup ng pare
 
         self.cap.release()
         cv2.destroyAllWindows()
+
+# 3. POLYMORPHISM (Subclass)
+class GesturePainter(HandTracker):
+    def process_frame(self, frame):
+        # POLYMORPHISM: Binago yung behavior ng process_frame para mag-overlay ng text graphics sa camera
+        cv2.putText(frame, "STATUS: Mode Painter Active", (10, 30),
+                    cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 255, 0), 2)
+
+if __name__ == "__main__":
+    # Dito natin papaganahin ang application
+    app = GesturePainter(confidence=0.8)
+    app.run_app()
